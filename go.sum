@@ -1,0 +1,6 @@
+github.com/golang/glog v1.1.2 h1:DVjP2PbBOzHyzA+dn3WhHIq4NdVu3Q+pvivFICf/7fo=
+github.com/golang/glog v1.1.2/go.mod h1:zR+okUeTbrL6EL3xHUDxZuEtGv04p5shwip1+mL/rLQ=
+github.com/kward/go-vnc v0.0.0-20171220234551-a2352a89d118 h1:7DDVeXZEgn5hqk+eroEFEbVEfjj4F70vFCEPWNev+Ps=
+github.com/kward/go-vnc v0.0.0-20171220234551-a2352a89d118/go.mod h1:/jc21Pl8uDPRDColkr/X6tjps3YvGRpJYiMPqRD0fZk=
+golang.org/x/net v0.15.0 h1:ugBLEUaxABaB5AJqW9enI0ACdci2RUd4eP51NTBvuJ8=
+golang.org/x/net v0.15.0/go.mod h1:idbUs1IY1+zTqbi8yxTbhexhEEk5ur9LInksu6HrEpk=
