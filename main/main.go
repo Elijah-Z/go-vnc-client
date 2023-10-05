@@ -5,16 +5,12 @@ import (
 	"github.com/kward/go-vnc"
 	"log"
 	"net"
-	"testing"
 	"time"
 
 	"github.com/kward/go-vnc/messages"
 	"github.com/kward/go-vnc/rfbflags"
 )
 
-func TestName(t *testing.T) {
-
-}
 func main() {
 	// Establish TCP connection to VNC server.
 	nc, err := net.Dial("tcp", "10.20.13.17:5900")
