@@ -4,13 +4,13 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
-	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 	"github.com/flopp/go-findfont"
 	"github.com/kward/go-vnc"
 	"github.com/kward/go-vnc/messages"
 	"github.com/kward/go-vnc/rfbflags"
 	"golang.org/x/net/context"
+	"image"
+	"image/color"
 	"log"
 	"net"
 	"os"
@@ -91,20 +91,20 @@ func connectVnc(serverAddr, serverPass string) {
 	vncWindow.Resize(fyne.NewSize(800, 600))
 
 	// 创建一个用于显示 VNC 图像的 vncImg.Image 对象
-	//vncRemote := canvas.NewRaster(func(w, h int) image.Image {
-	//	//return color.NRGBA{R: 0, G: 180, B: 0, A: 255}
-	//	img := image.NewRGBA(image.Rect(0, 0, int(remoteWidth), int(remoteHeight)))
-	//	// 将背景图涂黑
-	//	for x := 0; x < img.Bounds().Dx(); x++ {
-	//		for y := 0; y < img.Bounds().Dy(); y++ {
-	//			img.Set(x, y, color.Black)
-	//		}
-	//	}
-	//	return img
-	//})
+	vncRemote := canvas.NewRaster(func(w, h int) image.Image {
+		//return color.NRGBA{R: 0, G: 180, B: 0, A: 255}
+		img := image.NewRGBA(image.Rect(0, 0, int(remoteWidth), int(remoteHeight)))
+		// 将背景图涂黑
+		for x := 0; x < img.Bounds().Dx(); x++ {
+			for y := 0; y < img.Bounds().Dy(); y++ {
+				img.Set(x, y, color.Black)
+			}
+		}
+		return img
+	})
 
-	vncRemote := canvas.NewImageFromImage(nil)
-	vncRemote.FillMode = canvas.ImageFillOriginal
+	//vncRemote := canvas.NewImageFromImage(nil)
+	//vncRemote.FillMode = canvas.ImageFillOriginal
 
 	//获取帧缓冲
 	go func() {
@@ -147,43 +147,40 @@ func connectVnc(serverAddr, serverPass string) {
 	vncWindow.ShowAndRun()
 }
 
-func connect() {
-	// 创建界面
-	myApp := app.New()
-	myWindow := myApp.NewWindow("VNC 客户端")
-
-	serverAddressEntry := widget.NewEntry()
-	serverAddressEntry.SetPlaceHolder("VNC 服务器地址")
-
-	serverPasswordEntry := widget.NewPasswordEntry()
-	serverPasswordEntry.SetPlaceHolder("VNC 服务器密码")
-
-	connectButton := widget.NewButton("连接", func() {
-		//serverAddr := serverAddressEntry.Text
-		//serverPass := serverPasswordEntry.Text
-		serverAddr := "192.168.208.110:5900"
-		serverPass := "admin123"
-
-		//连接页面
-		log.Println("开始连接:", serverAddr)
-		log.Println(serverPass)
-		//connectimg(serverAddr serverPass)
-	})
-
-	content := container.NewVBox(
-		serverAddressEntry,
-		serverPasswordEntry,
-		connectButton,
-	)
-
-	myWindow.SetContent(content)
-	myWindow.Resize(fyne.NewSize(400, 300))
-	myWindow.ShowAndRun()
-}
+//func main() {
+//	// 创建界面
+//	myApp := app.New()
+//	myWindow := myApp.NewWindow("VNC 客户端")
+//
+//	serverAddressEntry := widget.NewEntry()
+//	serverAddressEntry.SetPlaceHolder("VNC 服务器地址")
+//
+//	serverPasswordEntry := widget.NewPasswordEntry()
+//	serverPasswordEntry.SetPlaceHolder("VNC 服务器密码")
+//
+//	connectButton := widget.NewButton("连接", func() {
+//		//serverAddr := serverAddressEntry.Text
+//		//serverPass := serverPasswordEntry.Text
+//		serverAddr := "10.20.13.17:5900"
+//		serverPass := "admin123"
+//
+//		connectVnc(serverAddr, serverPass)
+//		//连接页面
+//		log.Println("开始连接:", serverAddr)
+//	})
+//
+//	content := container.NewVBox(
+//		serverAddressEntry,
+//		serverPasswordEntry,
+//		connectButton,
+//	)
+//
+//	myWindow.SetContent(content)
+//	myWindow.Resize(fyne.NewSize(400, 300))
+//	myWindow.ShowAndRun()
+//
+//}
 
 func main() {
-	//login()
-	//connectVnc("192.168.101.173:5900", "admin123")
-	connect()
 	connectVnc("10.20.13.17:5900", "admin123")
 }
